@@ -1,0 +1,20 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="flex h-[calc(100vh-60px)] -m-4 bg-gray-50">
+
+    <!-- Main Calendar View Target -->
+    <div class="flex-1 p-6 overflow-y-auto relative" id="calendar-container" hx-get="{% url 'admin-calendar' %}"
+        hx-trigger="load">
+        <div class="flex items-center justify-center h-full text-gray-400">
+            Loading Scheduling Dashboard...
+        </div>
+    </div>
+
+    <!-- Slide-Over Container Target -->
+    <div id="slide-over-container"></div>
+</div>
+{% endblock %}
+
+{% block sidebar %}{% endblock %}

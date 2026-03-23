@@ -1,0 +1,70 @@
+<div id="calendar-container">
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">{{ month_name }} {{ year }}</h1>
+        <div class="flex space-x-2">
+            <button hx-get="{% url 'admin-calendar' %}?y={{ prev_y }}&m={{ prev_m }}" hx-target="#calendar-container"
+                class="px-4 py-2 border rounded hover:bg-gray-100 text-gray-600 transition">
+                Prev
+            </button>
+            <button hx-get="{% url 'admin-calendar' %}?y={{ next_y }}&m={{ next_m }}" hx-target="#calendar-container"
+                class="px-4 py-2 border rounded hover:bg-gray-100 text-gray-600 transition">
+                Next
+            </button>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-7 gap-px bg-gray-200 border rounded shadow-sm overflow-hidden text-sm">
+        <!-- Days of week headers -->
+        <div class="bg-gray-50 font-bold p-3 text-center text-gray-500 uppercase flex items-center justify-center">Sun
+        </div>
+        <div class="bg-gray-50 font-bold p-3 text-center text-gray-500 uppercase flex items-center justify-center">Mon
+        </div>
+        <div class="bg-gray-50 font-bold p-3 text-center text-gray-500 uppercase flex items-center justify-center">Tue
+        </div>
+        <div class="bg-gray-50 font-bold p-3 text-center text-gray-500 uppercase flex items-center justify-center">Wed
+        </div>
+        <div class="bg-gray-50 font-bold p-3 text-center text-gray-500 uppercase flex items-center justify-center">Thu
+        </div>
+        <div class="bg-gray-50 font-bold p-3 text-center text-gray-500 uppercase flex items-center justify-center">Fri
+        </div>
+        <div class="bg-gray-50 font-bold p-3 text-center text-gray-500 uppercase flex items-center justify-center">Sat
+        </div>
+
+        <!-- Calendar Cells -->
+        {% for week in weeks %}
+        {% for day in week %}
+        <div class="
+          h-32 p-2 border-t flex flex-col items-start justify-start relative group transition
+          {% if day.is_past %}bg-gray-50 cursor-not-allowed text-gray-400
+          {% elif not day.is_current_month %}bg-white text-gray-300
+          {% elif day.is_today %}bg-blue-50 cursor-pointer hover:bg-blue-100 border-blue-200
+          {% else %}bg-white cursor-pointer hover:bg-blue-50{% endif %}" {% if not day.is_past %}
+            hx-get="{% url 'htmx-appointment-form' %}?date={{ day.date|date:'Y-m-d' }}"
+            hx-target="#slide-over-container" {% endif %}>
+            <span class="
+            font-bold w-6 h-6 flex items-center justify-center rounded-full
+            {% if day.is_today %}bg-blue-600 text-white{% else %}text-gray-700{% endif %}
+        ">
+                {{ day.date.day }}
+            </span>
+
+            <!-- Render Appointments -->
+            <div class="mt-2 w-full space-y-1 overflow-y-auto custom-scrollbar flex-1 relative z-10">
+                {% for appt in day.appointments %}
+                <a href="{% url 'admin:appointments_appointment_change' appt.id %}" target="_blank" class="block truncate text-xs p-1 rounded font-medium transition cursor-pointer hover:opacity-80
+             {% if appt.status == 'scheduled' %}bg-blue-200 text-blue-800
+             {% elif appt.status == 'completed' %}bg-green-200 text-green-800
+             {% elif appt.status == 'cancelled' %}bg-red-200 text-red-800{% endif %}
+             " title="{{ appt.patient.name }} with {{ appt.doctor.name }}" onclick="event.stopPropagation();">
+                    {{ appt.start_time|time:"H:i" }} {{ appt.doctor.name }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Clear Slide-Over automatically inside OOB Swap if triggered randomly -->
+<div id="slide-over-container" hx-swap-oob="true"></div>

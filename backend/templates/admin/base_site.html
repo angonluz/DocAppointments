@@ -1,0 +1,27 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+<script src="{% static 'js/htmx_admin.js' %}"></script>
+<style>
+    /* Reset some restrictive django admin fonts/styles to let Tailwind breathe */
+    body {
+        font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+
+    #content {
+        padding: 0 !important;
+    }
+</style>
+<script>
+    // Configuration for Tailwind
+    tailwind.config = {
+        corePlugins: {
+            preflight: false, // Prevent Tailwind from completely breaking standard Django Admin styles
+        }
+    }
+</script>
+{% endblock %}
