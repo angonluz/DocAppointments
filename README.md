@@ -1,4 +1,4 @@
-# Vitable Medical Scheduling System
+# Medical Scheduling System
 
 A robust medical scheduling system built using Django, PostgreSQL, HTMX, Tailwind CSS, and Docker. This project uses a custom Admin-driven interface featuring a slick calendar dashboard to seamlessly manage Doctors, Patients, Availabilities, and Appointments without the need for a complex frontend SPA like React or Vue.
 

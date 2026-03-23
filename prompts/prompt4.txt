@@ -1,0 +1,75 @@
+IMPORTANT:
+- Keep Django Admin as the foundation (do NOT replace it with a separate frontend)
+- Extend and customize it
+- Use HTMX for dynamic behavior
+- Focus on usability and clean design
+
+Goal:
+Transform the Django Admin into a modern, user-friendly scheduling interface.
+
+Main feature:
+A custom admin dashboard with a calendar view where admins can visually manage appointments.
+
+Tasks:
+
+1. Admin UI customization
+- Override Django Admin templates (base_site.html, index.html, etc.)
+- Improve layout and styling
+- Suggest a clean design approach (spacing, typography, colors)
+- Optionally use a lightweight CSS framework (like Tailwind or similar)
+
+2. Custom Admin Dashboard (VERY IMPORTANT)
+- Replace default admin index page with a dashboard
+- Include a calendar view (monthly or weekly)
+- Display existing appointments on the calendar
+- Allow clicking a day to start scheduling a new appointment
+
+3. Calendar behavior
+- Show appointments per day
+- Highlight busy vs available days
+- Clicking a date should:
+  - Open a form OR
+  - Dynamically load a scheduling form (HTMX)
+
+4. HTMX integration
+- Load available time slots dynamically when:
+  - Selecting a doctor
+  - Selecting a date
+- Update parts of the page without full reload
+- Keep everything server-rendered
+
+5. Appointment creation UX
+- Make scheduling fast and intuitive:
+  - Select doctor
+  - Select date
+  - See available time slots
+  - Select patient
+- Minimize clicks
+
+6. Admin integration
+- Ensure this works well with Django Admin:
+  - Link to change forms
+  - Reuse ModelAdmin where possible
+  - Do NOT break admin navigation
+
+7. Suggested implementation approach
+- Which templates to override
+- Where to place custom views (inside admin or separate views)
+- How to register custom admin views (e.g., using AdminSite or custom URLs)
+
+8. Deliverables
+Provide:
+- High-level architecture
+- Template structure
+- Example Django admin customization (code snippets OK)
+- HTMX usage examples
+- Explanation of how everything connects
+
+Constraints:
+- Do NOT build a SPA
+- Do NOT introduce React/Vue
+- Keep it simple and maintainable
+- Follow Django best practices
+
+Goal:
+Make the admin feel like a modern scheduling tool with a calendar-driven workflow.

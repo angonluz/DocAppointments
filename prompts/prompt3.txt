@@ -1,0 +1,13 @@
+1. Start and end time are NOT being automatically populated
+   - When selecting a time slot, the system should automatically fill:
+     - start_time
+     - end_time (based on duration or slot)
+   - This is currently not working reliably
+
+2. HTMX time slot selection breaks after validation errors
+   - When form submission fails (e.g., validation error), the time slot selection becomes inconsistent or resets incorrectly
+   - The UI gets out of sync with backend state
+
+3. When start and/or end time are empty on adding a new appointment the creation returns an error, make those fields required both front and backend.
+
+4. Make past dates not available for appointments

@@ -1,0 +1,71 @@
+IMPORTANT:
+- Keep the current architecture (Django Admin + HTMX)
+- Do NOT introduce a new frontend
+- Focus on fixing UX inconsistencies and aligning behavior with Django best practices
+
+Issues to fix:
+
+1. Duplicate sidebar menu (CRITICAL)
+- Currently, the original Django Admin sidebar is displayed
+- There is also a new "Admin Modules" menu that duplicates the same items
+- This creates confusion and poor UX
+
+Tasks:
+- Remove the custom "Admin Modules" menu completely
+- Keep ONLY the original Django Admin sidebar
+- Ensure all navigation still works correctly
+- Keep the custom dashboard (calendar) as the admin index page
+
+2. Inconsistent appointment form behavior (CRITICAL)
+
+Problem:
+- The default Django Admin appointment form has proper validation and logic
+- The calendar-based form (used with HTMX) does NOT fully replicate this logic
+
+This creates inconsistency and potential data integrity issues.
+
+Tasks:
+- Ensure the calendar scheduling form uses the SAME logic as the default ModelAdmin form
+- Reuse validation rules (clean methods, form validation, etc.)
+- Avoid duplicating business logic
+
+Specifically:
+- When selecting a time slot:
+  - Automatically populate start_time and end_time
+  - Ensure duration and constraints are respected
+- Ensure all validations (e.g., no overlapping appointments) are enforced
+- Use the same ModelForm if possible
+
+3. HTMX behavior improvements
+
+- When a time slot is selected:
+  - Automatically fill the form fields (start_time, end_time)
+  - Update the UI without reloading the page
+- Ensure the interaction feels smooth and intuitive
+
+4. Recommended approach
+
+Explain clearly:
+- How to reuse Django ModelAdmin form logic in custom views
+- How to avoid duplicating validation logic
+- Whether to use ModelForm, admin form, or shared service layer
+- Where the logic should live (models vs forms vs admin)
+
+5. Deliverables
+
+Provide:
+- Clear explanation of fixes
+- Updated template snippets (if needed)
+- Updated HTMX snippets
+- Python code examples (forms, admin, or views if needed)
+
+Constraints:
+- Keep the solution simple and maintainable
+- Follow Django best practices
+- Do NOT break existing admin functionality
+
+Goal:
+A clean admin interface with:
+- No duplicated menus
+- A single source of truth for appointment logic
+- A smooth, consistent scheduling experience

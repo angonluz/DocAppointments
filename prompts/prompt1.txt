@@ -1,0 +1,24 @@
+I am starting a new Django project for a medical appointment scheduling system.
+
+I want to set up a clean, production-ready development environment using Docker and docker-compose.
+
+Requirements:
+- Use Python 3.12
+- Use Django (latest stable version)
+- Use PostgreSQL as the database
+- One container for Django (backend)
+- One container for PostgreSQL
+- Use environment variables for configuration
+- Persist PostgreSQL data using volumes
+- Use HTMX
+
+Project structure:
+- backend/ (Django project will live here)
+- infra/docker-compose.yml
+- infra/django/Dockerfile
+
+Tasks:
+1. Initialize a Django project inside the container
+2. Configure Django to use PostgreSQL
+3. Run commands for first-time setup (migrations, superuser) with docker-compose run (user = admin/ pass = admin)
+4. Make sure everything is working smoothly and correctly configured

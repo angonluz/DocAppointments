@@ -1,0 +1,60 @@
+Now I want to design the domain and architecture for a medical appointment scheduling system.
+
+IMPORTANT CONTEXT:
+This is an ADMIN-DRIVEN system.
+
+- ONLY admin users will interact with the system
+- There is NO public interface for patients or doctors
+- All operations (create, edit, schedule) must happen inside Django Admin
+- HTMX will be used to enhance the Django Admin experience (dynamic fields, dependent selects, etc.)
+- Do NOT design APIs or frontend apps
+
+System requirements:
+- Admin users schedule appointments between doctors and patients
+- Doctors have specialties and availability schedules
+- Patients are managed by admin users
+- Prevent double booking of doctors
+- Ensure appointments are within valid availability slots
+
+Tasks:
+
+1. Define core domain entities
+   - Focus on entities needed for admin scheduling (Doctor, Patient, Appointment, Availability, etc.)
+   - Keep the model set minimal and practical
+
+2. Define relationships
+   - Clearly describe how entities relate
+   - Include constraints relevant for scheduling
+
+3. Suggest Django app structure
+   - Split into logical apps (e.g., doctors, patients, appointments)
+   - Keep it simple and maintainable
+
+4. Define key business rules
+   - Prevent overlapping appointments
+   - Enforce doctor availability
+   - Ensure valid time ranges
+
+5. Suggest important fields for each entity
+   - Focus on what is needed for admin workflows
+   - Avoid unnecessary complexity
+
+6. Admin-focused design considerations (VERY IMPORTANT)
+   - How admins will create appointments efficiently
+   - What should be selectable/filterable
+   - Where inline editing makes sense
+   - What validations should happen in admin
+
+7. HTMX opportunities inside Django Admin
+   - Dynamically filter available time slots when selecting a doctor
+   - Update fields without reloading the page
+   - Keep it server-driven and simple
+
+8. Edge cases
+   - Double booking attempts
+   - Invalid availability
+   - Admin mistakes
+
+9. Where logic should live
+   - Models vs admin vs services
+   - Keep business rules consistent and enforceable
